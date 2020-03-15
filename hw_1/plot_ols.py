@@ -24,6 +24,7 @@ print(__doc__)
 
 import matplotlib.pyplot as plt
 import numpy as np
+import prettytable 
 from sklearn import datasets, linear_model
 from sklearn.metrics import mean_squared_error, r2_score
 
@@ -50,6 +51,10 @@ regr.fit(diabetes_X_train, diabetes_y_train)
 # Make predictions using the testing set
 diabetes_y_pred = regr.predict(diabetes_X_test)
 
+table = prettytable.PrettyTable()
+table.field_names = ['Coefficients', 'Mean squared error', 'Coefficient of determination']
+table.add_row([regr.coef_[0], mean_squared_error(diabetes_y_test, diabetes_y_pred), r2_score(diabetes_y_test, diabetes_y_pred)])
+print(table)
 # The coefficients
 print('Coefficients: \n', regr.coef_)
 # The mean squared error
@@ -60,9 +65,12 @@ print('Coefficient of determination: %.2f'
       % r2_score(diabetes_y_test, diabetes_y_pred))
 
 # Plot outputs
-plt.scatter(diabetes_X_test, diabetes_y_test,  color='black')
-plt.plot(diabetes_X_test, diabetes_y_pred, color='blue', linewidth=3)
-
+plt.scatter(diabetes_X_test, diabetes_y_test,  color='black', label = 'Real Value')
+plt.plot(diabetes_X_test, diabetes_y_pred, color='blue', linewidth=3, label = 'Predict Value')
+plt.xlabel('Input Value')
+plt.ylabel('Output Value')
+plt.legend(loc = 'best')
+plt.title('Linear Regression example')
 plt.xticks(())
 plt.yticks(())
 
