@@ -18,7 +18,6 @@ of determination are also calculated.
 """
 print(__doc__)
 
-
 # Code source: Jaques Grobler
 # License: BSD 3 clause
 
@@ -66,5 +65,5 @@ plt.plot(diabetes_X_test, diabetes_y_pred, color='blue', linewidth=3)
 
 plt.xticks(())
 plt.yticks(())
-print('Hello')
+
 plt.show()
